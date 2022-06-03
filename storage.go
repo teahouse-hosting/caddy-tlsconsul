@@ -309,8 +309,8 @@ func (cs *ConsulStorage) createConsulClient() error {
 
 func ConsulQueryDefaults(ctx context.Context) *consul.QueryOptions {
 	opts := &consul.QueryOptions{
-		UseCache:          true,
-		RequireConsistent: true,
+		UseCache:          false,
+		RequireConsistent: false,
 	}
 	return opts.WithContext(ctx)
 }
