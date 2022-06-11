@@ -4,7 +4,7 @@ go 1.16
 
 require (
 	github.com/armon/go-metrics v0.4.0 // indirect
-	github.com/caddyserver/caddy/v2 v2.5.0
+	github.com/caddyserver/caddy/v2 v2.5.1
 	github.com/caddyserver/certmagic v0.16.1
 	github.com/fatih/color v1.13.0 // indirect
 	github.com/hashicorp/consul/api v1.13.0
