@@ -16,6 +16,12 @@ The version of this plugin in the master branch supports Caddy 2.0.0+ using Cert
 - For Caddy 0.10.x to 0.11.1 : use the `old_storage_interface` branch.
 - For Caddy 1.x : use the `caddy1` branch.
 
+## Docker Image
+You can use my Docker image `pteich/caddy-tlsconsul` (https://hub.docker.com/r/pteich/caddy-tlsconsul) to get an image of Caddy including this Consul TLS plugin build in. It is based on the official caddy:2 image and will be build automatically on changes in this repo.
+
+Available tags are `pteich/caddy-tlsconsul:latest` or semver compatible version tags like 1.4 or 1.4.1 referencing the versions of this plugin.
+
+
 ## Configuration
 
 ### Caddy configuration
