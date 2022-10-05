@@ -80,7 +80,7 @@ There are additional ENV variables for this plugin:
 
 ### Consul ACL Policy
 
-To access Consul you need a token with a valid ACL policy. Assuming you configured `cadytls` as your K/V path prefix you can use the following settings:
+To access Consul you need a token with a valid ACL policy. Assuming you configured `caddytls` as your K/V path prefix you can use the following settings:
 ```
 key_prefix "caddytls" {
 	policy = "write"
