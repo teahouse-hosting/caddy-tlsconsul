@@ -25,7 +25,6 @@ func (ConsulStorage) CaddyModule() caddy.ModuleInfo {
 // Provision is called by Caddy to prepare the module
 func (cs *ConsulStorage) Provision(ctx caddy.Context) error {
 	cs.logger = ctx.Logger(cs).Sugar()
-	cs.logger.Infof("TLS storage is using Consul at %s", cs.Address)
 
 	// override default values from ENV
 	if aesKey := os.Getenv(EnvNameAESKey); aesKey != "" {
@@ -40,7 +39,15 @@ func (cs *ConsulStorage) Provision(ctx caddy.Context) error {
 		cs.ValuePrefix = valueprefix
 	}
 
-	return cs.createConsulClient()
+	err := cs.createConsulClient()
+	if err != nil {
+		return err
+	}
+
+	peers, _ := cs.ConsulClient.Status().Peers()
+	cs.logger.Infof("TLS storage is using Consul at %v", peers)
+
+	return nil
 }
 
 func (cs *ConsulStorage) CertMagicStorage() (certmagic.Storage, error) {
@@ -48,16 +55,17 @@ func (cs *ConsulStorage) CertMagicStorage() (certmagic.Storage, error) {
 }
 
 // UnmarshalCaddyfile parses plugin settings from Caddyfile
-// storage consul {
-//     address      "127.0.0.1:8500"
-//     token        "consul-access-token"
-//     timeout      10
-//     prefix       "caddytls"
-//     value_prefix "myprefix"
-//     aes_key      "consultls-1234567890-caddytls-32"
-//     tls_enabled  "false"
-//     tls_insecure "true"
-// }
+//
+//	storage consul {
+//	    address      "127.0.0.1:8500"
+//	    token        "consul-access-token"
+//	    timeout      10
+//	    prefix       "caddytls"
+//	    value_prefix "myprefix"
+//	    aes_key      "consultls-1234567890-caddytls-32"
+//	    tls_enabled  "false"
+//	    tls_insecure "true"
+//	}
 func (cs *ConsulStorage) UnmarshalCaddyfile(d *caddyfile.Dispenser) error {
 	for d.Next() {
 		key := d.Val()
