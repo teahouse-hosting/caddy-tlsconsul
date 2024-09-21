@@ -24,8 +24,8 @@ var (
 // in a shared cluster environment using Consul's key/value-store.
 // It uses distributed locks to ensure consistency.
 type ConsulStorage struct {
-	certmagic.Storage
-	ConsulClient *consul.Client
+	certmagic.Storage   `json:"-"`
+	ConsulClient *consul.Client  `json:"-"`
 	logger       *zap.SugaredLogger
 	muLocks      *sync.RWMutex
 	locks        map[string]*consul.Lock
