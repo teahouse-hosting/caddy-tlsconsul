@@ -305,9 +305,9 @@ func (cs *ConsulStorage) createConsulClient() error {
 		return fmt.Errorf("unable to create Consul client: %w", err)
 	}
 
-	if _, err := consulClient.Agent().NodeName(); err != nil {
-		return fmt.Errorf("unable to ping Consul: %w", err)
-	}
+	// if _, err := consulClient.Agent().NodeName(); err != nil {
+	// 	return fmt.Errorf("unable to ping Consul: %w", err)
+	// }
 
 	cs.ConsulClient = consulClient
 	return nil
