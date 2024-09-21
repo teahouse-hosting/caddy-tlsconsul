@@ -1,4 +1,4 @@
-module github.com/pteich/caddy-tlsconsul
+module github.com/teahouse-hosting/caddy-tlsconsul
 
 go 1.22.0
 
