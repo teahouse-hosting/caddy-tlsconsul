@@ -73,7 +73,7 @@ func (cs *ConsulStorage) Lock(ctx context.Context, key string) error {
 		Key:          cs.prefixKey(key),
 		LockWaitTime: time.Duration(cs.Timeout) * time.Second,
 		LockTryOnce:  true,
-		SessionName:  cs.prefixKey("caddy tls lock"),
+		Session:  cs.prefixKey("caddy-tls-lock"),
 	})
 	if err != nil {
 		return fmt.Errorf("could not create lock for %s: %w", cs.prefixKey(key), err)
